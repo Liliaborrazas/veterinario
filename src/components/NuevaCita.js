@@ -1,8 +1,56 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
-class NuevaCita extends Component {
-    state = {  }
-    render() { 
+export default function NuevaCita(){
+    const [cita, setCita] = useState(
+       {
+            mascota: '',
+            propietario: '',
+            fecha: '',
+            hora: '',
+            sintomas:''
+        }     
+    )
+//    const handleChange3 = (e)=>{
+//        console.log(e.target.name)
+//        // setCita({mascota: e.target.value});
+//        setCita({
+//            ...cita,
+//            mascota: e.target.value,
+          
+//        });
+//     }
+//     const handleChange2 = (e)=>{
+//         console.log(e.target.name)
+
+//         // setCita({mascota: e.target.value});
+//         setCita({
+//             ...cita,
+//             propietario: e.target.value
+//         });
+//      }
+//      const sintomas = (e)=> {
+//         console.log(e.target.name)
+
+//         setCita({
+//             ...cita,
+//             sintomas: e.target.value
+//         })
+//     }
+
+    // const handleChange = (e)=> {
+    //     setCita({
+    //         ...cita,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+    const handleChange = ({target}) =>{
+        const {name, value} = target;      
+        setCita({
+            ...cita,
+            [name]: value
+        })
+    }
+
         return ( 
             <div className="card mt-5 py-5">
                 <div className="card-body">
@@ -20,6 +68,7 @@ class NuevaCita extends Component {
                                     className="form-control"
                                     placeholder="Nombre Mascota"
                                     name="mascota"
+                                    onChange={handleChange}
                                 />
                                 </div>
                         </div>
@@ -33,6 +82,7 @@ class NuevaCita extends Component {
                                     className="form-control"
                                     placeholder="Nombre Dueño Mascota"
                                     name="propietario"
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>    
@@ -47,9 +97,7 @@ class NuevaCita extends Component {
                                     name="fecha"
                                 />
                             </div>
-                         </div>   
-                        <div className="form-group row">
-                            <label className="col-sm-4 col-lg-2 col-form-label">
+                         <label className="col-sm-4 col-lg-2 col-form-label">
                                Hora
                             </label>
                             <div className="col-sm-8 col-lg-4">
@@ -61,11 +109,27 @@ class NuevaCita extends Component {
                                 />
                              </div>
                         </div>
+                        <div className="form-group row">
+                            <label className="col-sm-4 col-lg-2 col-form-label">
+                               Síntomas
+                            </label>
+                            <div className="col-sm-8 col-lg-10">
+                                <textarea
+                                    className="form-control"
+                                    name="sintomas"
+                                    placeholder="Describe los síntomas"  
+                                    onChange={handleChange}                               
+                                ></textarea>
+                                </div>
+                        </div>
+                        <input type="submit" 
+                               className="py-3 mt-2 btn btn-success btn-block"
+                               value="Agregar Nueva Cita"
+                        />
                     </form>
                </div>
             </div>       
        );
     }
-}
+
  
-export default NuevaCita;
