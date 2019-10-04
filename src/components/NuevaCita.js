@@ -2,9 +2,6 @@ import React, {useState} from 'react';
 import uuid from 'uuid';
 
 
-
-
-
 export default function NuevaCita({crearNewCita}){
     const [cita, setCita] = useState({
             mascota: '',
@@ -19,36 +16,6 @@ export default function NuevaCita({crearNewCita}){
             error:false
     })
     
-//    const handleChange3 = (e)=>{
-//        console.log(e.target.name)
-//        // setCita({mascota: e.target.value});
-//        setCita({
-//            ...cita,
-//            mascota: e.target.value,
-          
-//        });
-//     }
-//     const handleChange2 = (e)=>{
-//         console.log(e.target.name)
-
-//         // setCita({mascota: e.target.value});
-//         setCita({
-//             ...cita,
-//             propietario: e.target.value
-//         });
-//      }
-//      const sintomas = (e)=> {
-//         console.log(e.target.name)
-
-//         setCita({
-//             ...cita,
-//             sintomas: e.target.value
-//         })
-//     }
-
-   
-
-    ///////
     ////////////Cuando el usuario escribe en los input
 
     const handleChange = ({target}) =>{
@@ -76,9 +43,12 @@ export default function NuevaCita({crearNewCita}){
         nuevaCita.id = uuid();
         crearNewCita(nuevaCita);
 
+       // const {error} = error
+
     }
-    
-   
+    // const handleClean = (e)=>{
+    //    setCita();
+    // }
 
         return ( 
             <div className="card mt-5 py-5">
@@ -86,6 +56,7 @@ export default function NuevaCita({crearNewCita}){
                     <h2 className="card-title text-center mb-5">
                         Llena el formulario para crear una nueva cita
                     </h2>
+                    {/* {error ? <div className="alert alert-danger mt-2 mb-5 text-center">Todos los capos son obligatorios</div> : null } */}
                     <form 
                         onSubmit={handleSubmit}
                     >
@@ -159,6 +130,7 @@ export default function NuevaCita({crearNewCita}){
                         <input type="submit" 
                                className="py-3 mt-2 btn btn-success btn-block"
                                value="Agregar Nueva Cita"
+                            //    onClick={handleClean}
                         />
                     </form>
                </div>
