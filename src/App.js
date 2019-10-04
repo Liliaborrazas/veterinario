@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import './bootstrap.min.css';
 import Header from './components/Header';
 import NuevaCita from './components/NuevaCita';
 
-class App extends Component {
-  state = {
 
+export default function App() {
+  const [citas, setCitas] = useState([])
+  const crearNewCita = (datos)=>{
+    console.log(datos)
+      const nuevasCitas = [datos,...citas];
+    setCitas(nuevasCitas)
   }
-  render() {
+
   return(
     <div className="container">
       <Header
@@ -15,12 +19,13 @@ class App extends Component {
         />
         <div className="row">
           <div className="col-md-10 mx-auto">
-         <NuevaCita/> 
+         <NuevaCita
+        crearNewCita={crearNewCita}
+         /> 
 
           </div>
         </div>
     </div>
   );
+
 }
-}
-export default App;

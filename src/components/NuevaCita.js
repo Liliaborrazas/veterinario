@@ -1,15 +1,24 @@
 import React, {useState} from 'react';
+import uuid from 'uuid';
 
-export default function NuevaCita(){
-    const [cita, setCita] = useState(
-       {
+
+
+
+
+export default function NuevaCita({crearNewCita}){
+    const [cita, setCita] = useState({
             mascota: '',
             propietario: '',
             fecha: '',
             hora: '',
             sintomas:''
-        }     
+        } ,
+        
     )
+    const [error, setError] = useState({
+            error:false
+    })
+    
 //    const handleChange3 = (e)=>{
 //        console.log(e.target.name)
 //        // setCita({mascota: e.target.value});
@@ -37,12 +46,11 @@ export default function NuevaCita(){
 //         })
 //     }
 
-    // const handleChange = (e)=> {
-    //     setCita({
-    //         ...cita,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
+   
+
+    ///////
+    ////////////Cuando el usuario escribe en los input
+
     const handleChange = ({target}) =>{
         const {name, value} = target;      
         setCita({
@@ -50,6 +58,27 @@ export default function NuevaCita(){
             [name]: value
         })
     }
+    ////Cuando el usuario envíe el formulario
+    const handleSubmit = (e)=>{
+        e.preventDefault();//Esto es para q no se dispare el formulario
+        const {mascota, propietario, fecha, hora, sintomas} = cita; 
+        if(mascota === '' || propietario === '' || fecha === '' || hora === '' || sintomas === '' ){
+            setError({
+                ...error,
+                error:true
+            });
+            return;
+        }
+        const nuevaCita = {
+            ...cita
+        }
+        
+        nuevaCita.id = uuid();
+        crearNewCita(nuevaCita);
+
+    }
+    
+   
 
         return ( 
             <div className="card mt-5 py-5">
@@ -57,7 +86,10 @@ export default function NuevaCita(){
                     <h2 className="card-title text-center mb-5">
                         Llena el formulario para crear una nueva cita
                     </h2>
-                    <form>
+                    <form 
+                        onSubmit={handleSubmit}
+                    >
+                       
                         <div className="form-group row">
                             <label className="col-sm-4 col-lg-2 col-form-label">
                                Nombre Mascota
@@ -95,6 +127,7 @@ export default function NuevaCita(){
                                     type="date"
                                     className="form-control"
                                     name="fecha"
+                                    onChange={handleChange}
                                 />
                             </div>
                          <label className="col-sm-4 col-lg-2 col-form-label">
@@ -105,7 +138,8 @@ export default function NuevaCita(){
                                     type="time"
                                     className="form-control"
                                     placeholder="Nombre Mascota"
-                                    name="fecha"
+                                    name="hora"
+                                    onChange={handleChange}
                                 />
                              </div>
                         </div>
