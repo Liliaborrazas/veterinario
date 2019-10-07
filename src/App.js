@@ -13,7 +13,14 @@ export default function App() {
   }
 
   const eliminarCita = id=>{
-    console.log(id)
+    //Tomar una copia del estado actual
+    const estadoActual = [...citas];
+    //utilizar filter para sacar el elemento id del array
+    const borrar = estadoActual.filter(cita=> cita.id !== id );
+    //actualizar el state
+    setCitas(borrar)
+
+    
   }
 
   return(
