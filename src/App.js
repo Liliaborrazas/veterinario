@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './bootstrap.min.css';
 import Header from './components/Header';
 import NuevaCita from './components/NuevaCita';
@@ -22,6 +22,25 @@ export default function App() {
 
     
   }
+  ////CUando la aplicacion se carga, se fija si hay datos en el local storage, si los hay los recoje, los convierte en json y los muestra en la ventana!!!!
+  useEffect(()=>{
+    const citasLS = localStorage.getItem('citas');
+    if(citasLS){
+      setCitas(JSON.parse(citasLS))
+    }
+  },[])
+
+  ///Cuando la aplicación carga...
+  //Para guardar en el localstorage, ponemos como primer parametro el array del estado(con comillas de string, ya que el local no soporta otra cosa 
+  //que no sea string) y le pasamos el array convirtiendolo en string.Lo vemos en aplication si funciona!
+  useEffect(()=>{
+    localStorage.setItem('citas', JSON.stringify(citas));
+  });
+
+
+
+  ///Cuando eliminamos o agregamos una nueva cita...
+
 
   return(
     <div className="container">
