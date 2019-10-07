@@ -2,7 +2,7 @@ import React from 'react';
 import Cita from './Cita';
 
 
-export default function ListaCitas({citas}){
+export default function ListaCitas({citas, eliminarCita}){
     return(
         <>
         <div className="card mt-2 py-5">
@@ -13,6 +13,7 @@ export default function ListaCitas({citas}){
                        <Cita
                             hey={cita.id}
                             cita={cita}
+                            eliminarCita={eliminarCita}
                        />
                    ))} 
                 </div>

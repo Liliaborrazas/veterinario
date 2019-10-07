@@ -12,6 +12,10 @@ export default function App() {
       setCitas(nuevasCitas)
   }
 
+  const eliminarCita = id=>{
+    console.log(id)
+  }
+
   return(
     <div className="container">
       <Header
@@ -25,6 +29,7 @@ export default function App() {
          <div className="mt-5 col-md-10 mx-auto">
            <ListaCitas
            citas = {citas}
+           eliminarCita={eliminarCita}
            />
          </div>
 
